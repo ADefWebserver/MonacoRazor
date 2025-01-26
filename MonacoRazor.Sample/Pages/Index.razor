@@ -4,24 +4,73 @@
 
 Welcome to your new app.
 
-<CodeEditor Language="csharp" @bind-Code="source" OnCompletionsRequested="GetCompletionsAsync" />
+<CodeEditor @ref="@MonacoCodeEditor" Language="csharp" Code="@CurrentScript" OnCompletionsRequested="GetCompletionsAsync" />
+<br />
+<button @onclick="GetCode">Get Code</button>&nbsp;
+<button @onclick="UpdateCode">Update Code</button>
 
-@source
+@if (!string.IsNullOrEmpty(Message))
+{
+    <div class="modal fade show" tabindex="-1" role="dialog" style="display: block;" aria-modal="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Current Script</h5>
+                </div>
+                <div class="modal-body">
+                    <div style="max-height: 300px; overflow-y: auto;">
+                        <CodeEditor Language="csharp" Code="@Message" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="CloseMessagePopup">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop fade show"></div>
+}
 
 @code {
-    string source = @"namespace Sample
+    CodeEditor MonacoCodeEditor;
+    string CurrentScript = "";
+    string SampleScript = @"namespace Sample
 {
     public class MyClass
     {
     }
 }";
 
+    protected override void OnInitialized()
+    {
+        CurrentScript = SampleScript;
+    }
+
     Task<Suggestion[]> GetCompletionsAsync(string currentValue, Position position)
     {
         return Task.FromResult(new[]
         {
-            new Suggestion { InsertText = "From C#" },
-            new Suggestion { InsertText = "OK" },
+            new Suggestion {Label = "From C#", InsertText = "From C#" },
+            new Suggestion {Label = "OK", InsertText = "OK" },
         });
     }
+
+    private async Task GetCode()
+    {
+        CurrentScript = await MonacoCodeEditor.GetCodeAsync();
+        Message = CurrentScript;
+    }
+
+    private async Task UpdateCode()
+    {
+        await MonacoCodeEditor.UpdateCodeAsync(SampleScript);
+    }
+
+    private string Message = "";
+
+    private void CloseMessagePopup()
+    {
+        Message = "";
+    }
+
 }
