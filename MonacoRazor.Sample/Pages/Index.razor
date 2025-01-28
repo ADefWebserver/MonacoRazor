@@ -11,7 +11,8 @@ Welcome to your new app.
 
 @if (!string.IsNullOrEmpty(Message))
 {
-    <div class="modal fade show" tabindex="-1" role="dialog" style="display: block;" aria-modal="true">
+    <div class="modal fade show" tabindex="-1" role="dialog" 
+    style="display: block;" aria-modal="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -23,7 +24,8 @@ Welcome to your new app.
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="CloseMessagePopup">Close</button>
+                    <button type="button" class="btn btn-secondary" 
+                    data-bs-dismiss="modal" @onclick="CloseMessagePopup">Close</button>
                 </div>
             </div>
         </div>
@@ -72,5 +74,4 @@ Welcome to your new app.
     {
         Message = "";
     }
-
 }
