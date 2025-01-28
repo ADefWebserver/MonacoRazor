@@ -4,9 +4,16 @@
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <Authors>Steve Sanderson</Authors>
+    <Authors>Steve Sanderson &amp; Michael Washington</Authors>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Description>A Blazor component that provides the Monaco code editor. NOTE: This is primarily intended for demo usage and does not expose the entire Monaco API surface.</Description>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>SimpleBlazorMonaco</Title>
+    <PackageProjectUrl>https://github.com/ADefWebserver/MonacoRazor</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ADefWebserver/MonacoRazor</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Blazor;Monaco</PackageTags>
+    <Version>$(VersionPrefix)</Version>
   </PropertyGroup>
   
   <ItemGroup>
