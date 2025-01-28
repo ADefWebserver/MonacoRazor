@@ -12,7 +12,8 @@
     <RepositoryUrl>https://github.com/ADefWebserver/MonacoRazor</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Blazor;Monaco</PackageTags>
-    <Version>$(VersionPrefix)</Version>
+    <Version>1.0.1</Version>
+    <Title>Simple Blazor Monaco</Title>
   </PropertyGroup>
   
   <ItemGroup>
