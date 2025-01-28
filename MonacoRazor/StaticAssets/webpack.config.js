@@ -20,7 +20,7 @@ module.exports = (env, args) => ({
         library: 'LIB',
         libraryTarget: 'var',
         path: path.join(__dirname, '..', 'wwwroot'),
-        publicPath: '_content/MonacoRazor/',
+        publicPath: '_content/SimpleBlazorMonaco/',
         filename: '[name].js',
     },
     plugins: [

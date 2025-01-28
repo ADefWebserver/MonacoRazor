@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MonacoRazor\MonacoRazor.csproj" />
+    <ProjectReference Include="..\MonacoRazor\SimpleBlazorMonaco.csproj" />
   </ItemGroup>
 
 </Project>
