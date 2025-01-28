@@ -19,7 +19,7 @@ You can add the following using statement to your main `_Imports.razor` to make 
 
 ## Usage
 
-Below is a list of all the options available on the Text Editor.
+Below is a list of all the options available on the Editor.
 
 **Properties**
 
