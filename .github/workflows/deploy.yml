@@ -17,7 +17,6 @@ jobs:
         with:
           dotnet-version: '9.0.x' # Ensure this matches your .NET version
 
-      # Add a step to set up Node.js with an LTS version
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -26,11 +25,11 @@ jobs:
       - name: Install dependencies
         run: dotnet restore MonacoRazor.Sample/MonacoRazor.Sample.csproj
 
+      - name: Install Node.js dependencies
+        run: npm install --openssl-legacy-provider
+
       - name: Build
-        run: |
-          # Temporarily set NODE_OPTIONS only for npm commands
-          npm install --openssl-legacy-provider
-          dotnet build --no-restore MonacoRazor.Sample/MonacoRazor.Sample.csproj
+        run: dotnet build --no-restore MonacoRazor.Sample/MonacoRazor.Sample.csproj
 
       - name: Publish
         run: dotnet publish -c Release -o ./dist MonacoRazor.Sample/MonacoRazor.Sample.csproj
