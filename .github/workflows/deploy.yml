@@ -21,15 +21,15 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '16' # LTS version
 
       - name: Install dependencies
         run: dotnet restore MonacoRazor.Sample/MonacoRazor.Sample.csproj
 
       - name: Build
         run: |
-          # Set NODE_OPTIONS to enable OpenSSL legacy provider
-          export NODE_OPTIONS=--openssl-legacy-provider
+          # Temporarily set NODE_OPTIONS only for npm commands
+          npm install --openssl-legacy-provider
           dotnet build --no-restore MonacoRazor.Sample/MonacoRazor.Sample.csproj
 
       - name: Publish
