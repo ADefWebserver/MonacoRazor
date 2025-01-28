@@ -6,3 +6,4 @@ node_modules/
 MonacoRazor/wwwroot/*.js
 MonacoRazor/wwwroot/*.js.map
 MonacoRazor/wwwroot/*.ttf
+/artifacts/SimpleBlazorMonaco.1.0.0.nupkg
