@@ -1,4 +1,4 @@
-![image](https://github.com/ADefWebserver/MonacoRazor/blob/master/example.png)
+![image](https://github.com/ADefWebserver/MonacoRazor/blob/main/example.png)
 
 ## Installing
 
