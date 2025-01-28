@@ -1,0 +1,33 @@
+name: Build and Deploy Blazor WebAssembly to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '9.0.x' # Ensure this matches your .NET version
+
+      - name: Install dependencies
+        run: dotnet restore MonacoRazor.Sample/MonacoRazor.Sample.csproj
+
+      - name: Build
+        run: dotnet build --no-restore MonacoRazor.Sample/MonacoRazor.Sample.csproj
+
+      - name: Publish
+        run: dotnet publish -c Release -o ./dist MonacoRazor.Sample/MonacoRazor.Sample.csproj
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
