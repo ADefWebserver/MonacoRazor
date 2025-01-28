@@ -9,6 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleBlazorMonaco", "Monac
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AA60BCCD-BBC3-4D43-B681-1B2EC66F03AE}"
 	ProjectSection(SolutionItems) = preProject
+		icon.png = icon.png
 		README.md = README.md
 	EndProjectSection
 EndProject

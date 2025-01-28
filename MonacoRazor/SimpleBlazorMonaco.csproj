@@ -12,9 +12,22 @@
     <RepositoryUrl>https://github.com/ADefWebserver/MonacoRazor</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Blazor;Monaco</PackageTags>
-    <Version>1.0.1</Version>
+    <Version>1.0.5</Version>
     <Title>Simple Blazor Monaco</Title>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
   
   <ItemGroup>
     <SupportedPlatform Include="browser" />
