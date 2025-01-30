@@ -26,6 +26,11 @@ Below is a list of all the options available on the Editor.
 - `Language` - The language of the editor.
 - `Code`  - The code to be displayed in the editor.
 - `OnCompletionsRequested`  - A method that is called when the editor requests completions.
+- `Height` - The height of the editor.
+- `Width` - The width of the editor.
+- `Border` - The border of the editor.
+- `Margin` - The margin of the editor.
+- `MinHeight` - The minimum height of the editor.
 
 **Methods**
 
@@ -39,20 +44,28 @@ Below is a list of all the options available on the Editor.
 
 ```cs
 @page "/"
-@using MonacoRazor
 @using SimpleBlazorMonaco
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
 
-<CodeEditor @ref="@MonacoCodeEditor" Language="csharp" Code="@CurrentScript" OnCompletionsRequested="GetCompletionsAsync" />
+<CodeEditor @ref="@MonacoCodeEditor"
+            Language="csharp"
+            Code="@CurrentScript"
+            OnCompletionsRequested="GetCompletionsAsync"
+            Height="300px"
+            Width="90%"
+            Border="2px solid gray"
+            Margin="1em 0"
+            MinHeight="300px" />
 <br />
 <button @onclick="GetCode">Get Code</button>&nbsp;
 <button @onclick="UpdateCode">Update Code</button>
 
 @if (!string.IsNullOrEmpty(Message))
 {
-    <div class="modal fade show" tabindex="-1" role="dialog" style="display: block;" aria-modal="true">
+    <div class="modal fade show" tabindex="-1" role="dialog"
+         style="display: block;" aria-modal="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -64,8 +77,10 @@ Welcome to your new app.
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" 
-                    data-bs-dismiss="modal" @onclick="CloseMessagePopup">Close</button>
+                    <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal" @onclick="CloseMessagePopup">
+                        Close
+                    </button>
                 </div>
             </div>
         </div>
