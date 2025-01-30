@@ -1,18 +1,29 @@
 ﻿@using MonacoRazor
 @inject IJSRuntime JS
 @implements IAsyncDisposable
+<style>
+    .monacoEditor {
+    @style
+    }
+</style>
 
-<div class="editor" @ref="element"></div>
+<div class="monacoEditor" @ref="element"></div>
 
 @code {
     [Parameter] public string Language { get; set; }
     [Parameter] public string Code { get; set; }
+    [Parameter] public string Height { get; set; }
+    [Parameter] public string Width { get; set; }
+    [Parameter] public string Border { get; set; }
+    [Parameter] public string Margin { get; set; }
+    [Parameter] public string MinHeight { get; set; }
     [Parameter] public EventCallback<string> CodeChanged { get; set; }
     [Parameter] public Func<string, Position, Task<Suggestion[]>> OnCompletionsRequested { get; set; }
 
     private DotNetObjectReference<CodeEditor> thisReference;
     private ElementReference element;
     private readonly Lazy<Task<IJSObjectReference>> moduleTask;
+    private string style = "";
 
     public CodeEditor()
     {
@@ -28,6 +39,20 @@
             var module = await moduleTask.Value;
             await module.InvokeVoidAsync("init", element, thisReference, Language ?? "csharp", Code);
         }
+    }
+
+    // Paramaters set
+    protected override void OnParametersSet()
+    {
+        // Set Style
+        Code = Code ?? string.Empty;
+        Height = Height ?? "300px";
+        Width = Width ?? "100%";
+        Border = Border ?? "2px solid gray";
+        Margin = Margin ?? "1em 0";
+        MinHeight = MinHeight ?? "300px";
+
+        style = $"height: {Height}; width: {Width}; border: {Border}; margin: {Margin}; min-height: {MinHeight};";
     }
 
     public async Task UpdateCodeAsync(string code)
