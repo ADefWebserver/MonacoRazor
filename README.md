@@ -25,7 +25,6 @@ Below is a list of all the options available on the Editor.
 
 - `Language` - The language of the editor.
 - `Code`  - The code to be displayed in the editor.
-- `OnCompletionsRequested`  - A method that is called when the editor requests completions.
 - `Height` - The height of the editor.
 - `Width` - The width of the editor.
 - `Border` - The border of the editor.
@@ -36,6 +35,7 @@ Below is a list of all the options available on the Editor.
 
 - `GetCodeAsync()` - Gets the content of the editor.
 - `UpdateCodeAsync(code)` - Updates the content of the editor.
+- `OnCompletionsRequested`  - A method that is called when the editor requests completions.
 
 ## Basic Example
 
