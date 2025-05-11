@@ -1,4 +1,4 @@
-![image](https://github.com/ADefWebserver/MonacoRazor/blob/main/example.png)
+![image](https://github.com/user-attachments/assets/d14a9c53-8699-4e30-9efe-8b963e10ee9e)
 
 ## Installing
 
@@ -35,6 +35,7 @@ Below is a list of all the options available on the Editor.
 
 - `GetCodeAsync()` - Gets the content of the editor.
 - `UpdateCodeAsync(code)` - Updates the content of the editor.
+- `UpdateLanguage(language)` - Updates the language of the editor.
 - `OnCompletionsRequested`  - A method that is called when the editor requests completions.
 
 ## Basic Example
@@ -47,10 +48,20 @@ Below is a list of all the options available on the Editor.
 @using SimpleBlazorMonaco
 <h1>Hello, world!</h1>
 
-Welcome to your new app.
+<h4>Welcome to your new app.</h4>
+
+<div class="language-selector" style="margin-bottom:1em;">
+    <label for="languageSelect">Select Language:</label>
+    <select id="languageSelect"
+            @onchange="@(async args => await DynamicUpdateLanguage(args.Value?.ToString()!))"
+            value="@CurrentLanguage">
+        <option value="csharp">C#</option>
+        <option value="python">Python</option>
+    </select>
+</div>
 
 <CodeEditor @ref="@MonacoCodeEditor"
-            Language="csharp"
+            Language="@CurrentLanguage"
             Code="@CurrentScript"
             OnCompletionsRequested="GetCompletionsAsync"
             Height="300px"
@@ -72,12 +83,11 @@ Welcome to your new app.
                     <h5 class="modal-title">Current Script</h5>
                 </div>
                 <div class="modal-body">
-                    <CodeEditor 
-                        Language="csharp" 
-                        Height="90%" 
-                        Width="99%" 
-                        Border="0px" 
-                        Code="@Message" />
+                    <CodeEditor Language="@CurrentLanguage"
+                                Height="90%"
+                                Width="99%"
+                                Border="0px"
+                                Code="@Message" />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary"
@@ -94,6 +104,10 @@ Welcome to your new app.
 @code {
     CodeEditor MonacoCodeEditor;
     string CurrentScript = "";
+
+    // default language
+    private string CurrentLanguage { get; set; } = "csharp";
+
     string SampleScript = @"namespace Sample
     {
         public class MyClass
@@ -104,6 +118,18 @@ Welcome to your new app.
     protected override void OnInitialized()
     {
         CurrentScript = SampleScript;
+    }
+
+    private async Task DynamicUpdateLanguage(string language)
+    {
+        //set the field so the CodeEditor will pick up the new language
+        CurrentLanguage = language switch
+        {
+            "python" => "python",
+            _ => "csharp"
+        };
+
+        await UpdateLanguage(CurrentLanguage);
     }
 
     Task<Suggestion[]> GetCompletionsAsync(string currentValue, Position position)
@@ -124,6 +150,11 @@ Welcome to your new app.
     private async Task UpdateCode()
     {
         await MonacoCodeEditor.UpdateCodeAsync(SampleScript);
+    }
+
+    private async Task UpdateLanguage(string language)
+    {
+        await MonacoCodeEditor.UpdateLanguageAsync(language);
     }
 
     private string Message = "";
