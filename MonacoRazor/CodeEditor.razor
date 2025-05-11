@@ -58,13 +58,20 @@
     public async Task UpdateCodeAsync(string code)
     {
         var module = await moduleTask.Value;
-        await module.InvokeVoidAsync("updateValue", element, thisReference, code);
+        await module.InvokeVoidAsync("updateValue", element, code);
     }
 
     public async Task<string> GetCodeAsync()
     {
         var module = await moduleTask.Value;
         return await module.InvokeAsync<string>("getValue", element);
+    }
+
+    [JSInvokable]
+    public async Task UpdateLanguageAsync(string language)
+    {
+        var module = await moduleTask.Value;
+        await module.InvokeVoidAsync("updateLanguage", element, language);
     }
 
     [JSInvokable]

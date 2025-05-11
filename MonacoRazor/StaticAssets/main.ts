@@ -1,4 +1,4 @@
-import * as monaco from 'monaco-editor';
+﻿import * as monaco from 'monaco-editor';
 
 type DotNetObjectReference = {
     invokeMethodAsync: (methodName: string, ...args: any[]) => Promise<void>;
@@ -41,13 +41,14 @@ export function init(
     editorMap.set(element, editor);
 }
 
+// Update the editor value from Blazor
 export function updateValue(
     element: HTMLElement,
-    component: DotNetObjectReference,
     value: string
 ) {
     // Retrieve the editor instance from the WeakMap
     const editor = editorMap.get(element);
+
     if (editor) {
         editor.setValue(value);
     }
@@ -55,9 +56,21 @@ export function updateValue(
 
 // Get the curent value of the editor
 export function getValue(element: HTMLElement) {
+    // Retrieve the editor instance from the WeakMap
     const editor = editorMap.get(element);
+
     return editor ? editor.getValue() : '';
 }
+
+// Update the language of the editor
+export function updateLanguage(element: HTMLElement, language: string) {
+    const editor = editorMap.get(element);
+    if (!editor) return;
+    const model = editor.getModel();
+    if (!model) return;
+    monaco.editor.setModelLanguage(model, language);
+}
+
 
 class RemoteCompletionItemProvider implements monaco.languages.CompletionItemProvider {
     public triggerCharacters = ['.'];
