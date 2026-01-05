@@ -1,5 +1,4 @@
-![image](https://github.com/user-attachments/assets/d14a9c53-8699-4e30-9efe-8b963e10ee9e)
-
+![image](https://raw.githubusercontent.com/ADefWebserver/MonacoRazor/main/example.png)
 ## Installing
 
 You can install from NuGet using the following command:
